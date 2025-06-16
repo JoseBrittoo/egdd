@@ -1,10 +1,14 @@
 import AppRoutes from "./routes";
 import Navbar from "./components/Navbar";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
+  const hideNavbar = location.pathname === "/login" || location.pathname === "/register";
+
   return (
     <>
-      <Navbar />
+      {!hideNavbar && <Navbar />}
       <AppRoutes />
     </>
   );

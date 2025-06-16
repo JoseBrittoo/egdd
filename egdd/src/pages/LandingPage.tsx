@@ -19,7 +19,7 @@ export default function LandingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/login")}
                 className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg"
               >
                 Começar
@@ -191,7 +191,7 @@ export default function LandingPage() {
 
           <div className="mt-10">
             <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/login")}
               className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg"
             >
               Começar
