@@ -2,8 +2,11 @@ import { Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import ValidationIA from "../components/ValidationIA";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonaPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full min-h-screen bg-[#e9f5ff] flex items-center justify-center py-4 px-4">
       <div className="w-[1800px] bg-white rounded-xl shadow-md flex overflow-hidden">
@@ -88,6 +91,7 @@ export default function PersonaPage() {
                   </Link>
                   <button
                     type="submit"
+                    onClick={() => navigate("/narrativa")}
                     className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg"
                   >
                     Próximo

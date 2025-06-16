@@ -1,8 +1,11 @@
 import Sidebar from "../components/Sidebar";
 import ValidationIA from "../components/ValidationIA";
 import { Info } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function ContextoEducacionalPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full min-h-screen bg-[#e9f5ff] flex items-center justify-center py-4 px-4">
       <div className="w-[1800px] bg-white rounded-xl shadow-md flex overflow-hidden">
@@ -89,12 +92,14 @@ export default function ContextoEducacionalPage() {
                 <div className="flex justify-between mt-6">
                   <button
                     type="button"
+                    onClick={() => navigate("/Dashboard")}
                     className="bg-white border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100"
                   >
                     Voltar
                   </button>
                   <button
                     type="submit"
+                    onClick={() => navigate("/persona")}
                     className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg"
                   >
                     Próximo
