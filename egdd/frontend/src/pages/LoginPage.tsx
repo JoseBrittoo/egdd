@@ -2,9 +2,33 @@ import { Mail, Lock } from "lucide-react";
 import google from "../assets/google.svg";
 import logoegdd from "../assets/logoegdd.png";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+
+  // Adicione estes estados:
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    const res = await fetch("http://localhost:3002/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (res.ok) {
+      navigate("/dashboard");
+    } else {
+      const data = await res.json();
+      setError(data.detail || "Erro no login");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#D9F0FF] px-4">
@@ -15,12 +39,14 @@ export default function LoginPage() {
           <p className="text-sm text-gray-600">Entre para acessar sua conta</p>
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleLogin}>
           <div className="relative">
             <Mail className="absolute left-3 top-3 text-gray-500" size={18} />
             <input
               type="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2"
             />
           </div>
@@ -30,23 +56,16 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2"
             />
           </div>
 
-          <div className="flex justify-between items-center text-sm text-gray-600">
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-              Lembre-se de mim
-            </label>
-            <a href="#" className="hover:underline">
-              Recuperar senha?
-            </a>
-          </div>
+          {error && <p className="text-red-600 text-sm">{error}</p>}
 
           <button
             type="submit"
-            onClick={() => navigate("/dashboard")}
             className="w-full bg-[#115A92] hover:bg-[#0e4e7d] text-white py-2 rounded-lg font-medium"
           >
             Login
